@@ -1,0 +1,68 @@
+<br />
+
+<div class="alert alert-danger" 
+	role="alert" 
+	*ngIf = 'hasError'>
+	Error getting data
+</div>
+<div class="panel panel-success " >
+	<div class="panel-heading  d-flex justify-content-center">
+		Select value and currency you want to convert
+	</div>
+	<br />
+	<div class="panel-body text-left d-flex justify-content-center">
+	  <form class="form-inline " 
+	  #conversorForm = "ngForm">
+		<input
+
+			[(ngModel)] = 'conversion.value'
+			appNumber
+			type="text" 
+			name="valor"
+			class="form-control text-right "
+			placeholder="Insert the value" 
+			required>
+		
+		<select 
+			name="moedaDe"
+			[(ngModel)] = "conversion.origin"
+			class="form-control"
+			required>
+			<option 
+			*ngFor = 'let curency of curencys'  
+			[value] = 'curency.curencySigla'>
+				{{curency.curencySigla}} -  {{curency.curencyDescription}}
+			</option>
+		</select>
+		<span class="glyphicon glyphicon-arrow-right"></span>
+		<select 
+			name="moedaPara"
+			class="form-control"
+			[(ngModel)] = "conversion.destination"
+			required>
+			<option 
+			*ngFor = 'let curency of curencys' 
+			[value] ='curency.curencySigla'>
+				{{curency.curencySigla}} -  {{curency.curencyDescription}}
+			</option>
+		</select>
+		<br />
+		<input 
+			(click) = 'converter()'
+			[disabled] = "!conversorForm.form.valid"
+			type="submit" 
+			value="Convert"
+			class="btn btn-success col-sm-12">
+	  </form>
+	 </div>
+	 <app-modal-price 
+		*ngIf = 'openModal'
+		[conversionResponse] = "conversionResponse"
+		[conversion] = "conversion"
+		(onConfirm) ="init()">
+	</app-modal-price>
+	 
+
+	
+</div>
+

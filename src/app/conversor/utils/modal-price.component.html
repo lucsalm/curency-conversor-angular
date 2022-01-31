@@ -1,0 +1,30 @@
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Cotação em {{quoteDate | dataBr}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="backToConversor()">
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+			<h2>
+				{{ conversion.value }} 
+				{{ conversion.origin }} 
+				= 
+				{{ convertedValue }} 
+				{{ conversion.destination }}
+			</h2>
+			<p>
+        1 {{ conversion.origin }} = 
+				{{ originQuoteToDestination }} {{ conversion.destination }}
+        /
+				1 {{ conversion.destination }} = 
+				{{ destinationQuoteToOrigin }} {{ conversion.origin }} 
+				
+			</p>
+		</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="backToConversor()">Close</button>
+  </div>
+</ng-template>
